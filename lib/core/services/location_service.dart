@@ -92,7 +92,8 @@ class LocationService {
     double lng,
   ) async {
     try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(lat, lng);
+      final geocoding = Geocoding();
+      List<Placemark> placemarks = await geocoding.placemarkFromCoordinates(lat, lng);
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
         List<String> addressParts = [];

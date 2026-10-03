@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/app_colors.dart';
 import '../../models/training_model.dart';
 import '../../providers/auth_provider.dart';
@@ -83,9 +84,7 @@ class _RegisterViewState extends State<RegisterView> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daftar Akun Baru'),
-      ),
+      appBar: AppBar(title: const Text('Daftar Akun Baru')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -100,11 +99,15 @@ class _RegisterViewState extends State<RegisterView> {
                     color: isDark ? AppColors.darkCard : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                      color: isDark
+                          ? AppColors.darkBorder
+                          : AppColors.lightBorder,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
+                        color: Colors.black.withValues(
+                          alpha: isDark ? 0.2 : 0.04,
+                        ),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -114,7 +117,7 @@ class _RegisterViewState extends State<RegisterView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Registrasi Peserta PPKD',
+                        'Registrasi Peserta Training Center',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -122,10 +125,12 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Lengkapi data diri, batch, dan kejuruan pelatihan Anda.',
+                        'Lengkapi data diri, batch, dan kejuruan Training Anda.',
                         style: TextStyle(
                           fontSize: 13,
-                          color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.lightTextSecondary,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -133,7 +138,10 @@ class _RegisterViewState extends State<RegisterView> {
                       // Nama Lengkap
                       const Text(
                         'Nama Lengkap',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       TextFormField(
@@ -154,7 +162,10 @@ class _RegisterViewState extends State<RegisterView> {
                       // Email
                       const Text(
                         'Email',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       TextFormField(
@@ -179,11 +190,14 @@ class _RegisterViewState extends State<RegisterView> {
                       // Batch Pelatihan
                       const Text(
                         'Batch Pelatihan',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       DropdownButtonFormField<String>(
-                        value: _selectedBatch,
+                        initialValue: _selectedBatch,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.group_work_outlined),
                         ),
@@ -202,11 +216,14 @@ class _RegisterViewState extends State<RegisterView> {
                       // Kejuruan Training (Berdasarkan ID Training)
                       const Text(
                         'Kejuruan Pelatihan (ID Training)',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       DropdownButtonFormField<TrainingModel>(
-                        value: _selectedTraining,
+                        initialValue: _selectedTraining,
                         isExpanded: true,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.school_outlined),
@@ -221,7 +238,8 @@ class _RegisterViewState extends State<RegisterView> {
                           );
                         }).toList(),
                         onChanged: (val) {
-                          if (val != null) setState(() => _selectedTraining = val);
+                          if (val != null)
+                            setState(() => _selectedTraining = val);
                         },
                       ),
                       const SizedBox(height: 16),
@@ -229,7 +247,10 @@ class _RegisterViewState extends State<RegisterView> {
                       // Password
                       const Text(
                         'Password',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       TextFormField(
@@ -240,7 +261,9 @@ class _RegisterViewState extends State<RegisterView> {
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                              _obscurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
                             onPressed: () {
                               setState(() {
@@ -264,7 +287,10 @@ class _RegisterViewState extends State<RegisterView> {
                       // Konfirmasi Password
                       const Text(
                         'Konfirmasi Password',
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       TextFormField(
@@ -275,11 +301,14 @@ class _RegisterViewState extends State<RegisterView> {
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                              _obscureConfirmPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
                             onPressed: () {
                               setState(() {
-                                _obscureConfirmPassword = !_obscureConfirmPassword;
+                                _obscureConfirmPassword =
+                                    !_obscureConfirmPassword;
                               });
                             },
                           ),
@@ -300,7 +329,9 @@ class _RegisterViewState extends State<RegisterView> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: authProvider.isLoading ? null : _handleRegister,
+                          onPressed: authProvider.isLoading
+                              ? null
+                              : _handleRegister,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -336,7 +367,9 @@ class _RegisterViewState extends State<RegisterView> {
                     Text(
                       'Sudah memiliki akun? ',
                       style: TextStyle(
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
                       ),
                     ),
                     GestureDetector(

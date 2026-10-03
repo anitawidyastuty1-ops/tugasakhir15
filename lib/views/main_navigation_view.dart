@@ -31,7 +31,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.3 : 0.05),
+              color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.05),
               blurRadius: 10,
               offset: const Offset(0, -3),
             ),
@@ -45,7 +45,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
             });
           },
           backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
-          indicatorColor: AppColors.primary.withOpacity(0.15),
+          indicatorColor: AppColors.primary.withValues(alpha: 0.15),
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.dashboard_outlined),

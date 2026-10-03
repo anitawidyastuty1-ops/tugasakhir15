@@ -32,7 +32,7 @@ class AttendanceStatsCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -54,7 +54,7 @@ class AttendanceStatsCard extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.12),
+                  color: AppColors.primary.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -149,7 +149,7 @@ class AttendanceStatsCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isDark ? color.withOpacity(0.2) : bgColor,
+              color: isDark ? color.withValues(alpha: 0.2) : bgColor,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 20),

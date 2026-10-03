@@ -103,7 +103,7 @@ class InteractiveMapView extends StatelessWidget {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.65),
+                      color: Colors.black.withValues(alpha: 0.65),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/date_formatter.dart';
 import '../../models/absen_model.dart';
@@ -72,8 +73,10 @@ class _HistoryViewState extends State<HistoryView> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Hapus Presensi'),
-        content: Text('Hapus riwayat presensi tanggal ${item.formattedShortDate}?'),
+        title: const Text('Hapus Absensi'),
+        content: Text(
+          'Hapus riwayat Absensi tanggal ${item.formattedShortDate}?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -95,7 +98,7 @@ class _HistoryViewState extends State<HistoryView> {
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Riwayat presensi berhasil dihapus'),
+              content: Text('Riwayat Absensi berhasil dihapus'),
               backgroundColor: AppColors.success,
               behavior: SnackBarBehavior.floating,
             ),
@@ -121,7 +124,7 @@ class _HistoryViewState extends State<HistoryView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Riwayat Presensi'),
+        title: const Text('Riwayat Absensi'),
         actions: [
           if (_startDate != null)
             IconButton(
@@ -140,21 +143,26 @@ class _HistoryViewState extends State<HistoryView> {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () => absenProvider.fetchHistory(
-          start: _startDate,
-          end: _endDate,
-        ),
+        onRefresh: () =>
+            absenProvider.fetchHistory(start: _startDate, end: _endDate),
         child: Column(
           children: [
             // Filter info banner if active
             if (_startDate != null && _endDate != null)
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                color: AppColors.primary.withOpacity(0.1),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
+                color: AppColors.primary.withValues(alpha: 0.1),
                 child: Row(
                   children: [
-                    const Icon(Icons.filter_list, size: 18, color: AppColors.primary),
+                    const Icon(
+                      Icons.filter_list,
+                      size: 18,
+                      color: AppColors.primary,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -186,16 +194,19 @@ class _HistoryViewState extends State<HistoryView> {
               child: absenProvider.isLoadingHistory
                   ? const Center(child: CircularProgressIndicator())
                   : history.isEmpty
-                      ? _buildEmptyState(isDark)
-                      : ListView.separated(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                          itemCount: history.length,
-                          separatorBuilder: (_, _) => const SizedBox(height: 12),
-                          itemBuilder: (context, index) {
-                            final item = history[index];
-                            return _buildHistoryCard(context, item, isDark);
-                          },
-                        ),
+                  ? _buildEmptyState(isDark)
+                  : ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      itemCount: history.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        final item = history[index];
+                        return _buildHistoryCard(context, item, isDark);
+                      },
+                    ),
             ),
           ],
         ),
@@ -214,11 +225,13 @@ class _HistoryViewState extends State<HistoryView> {
             Icon(
               Icons.event_busy_outlined,
               size: 72,
-              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              color: isDark
+                  ? AppColors.darkTextSecondary
+                  : AppColors.lightTextSecondary,
             ),
             const SizedBox(height: 16),
             const Text(
-              'Belum Ada Riwayat Presensi',
+              'Belum Ada Riwayat Absensi',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
@@ -227,7 +240,9 @@ class _HistoryViewState extends State<HistoryView> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.lightTextSecondary,
               ),
             ),
           ],
@@ -241,9 +256,7 @@ class _HistoryViewState extends State<HistoryView> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => DetailAbsenView(absen: item),
-          ),
+          MaterialPageRoute(builder: (_) => DetailAbsenView(absen: item)),
         );
       },
       borderRadius: BorderRadius.circular(16),
@@ -257,7 +270,7 @@ class _HistoryViewState extends State<HistoryView> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.2 : 0.03),
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
               blurRadius: 8,
               offset: const Offset(0, 3),
             ),
@@ -275,7 +288,9 @@ class _HistoryViewState extends State<HistoryView> {
                     Icon(
                       Icons.calendar_today,
                       size: 14,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -290,11 +305,16 @@ class _HistoryViewState extends State<HistoryView> {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: item.isIzin
                             ? AppColors.warningLight
-                            : (item.isCheckedOut ? AppColors.successLight : AppColors.infoLight),
+                            : (item.isCheckedOut
+                                  ? AppColors.successLight
+                                  : AppColors.infoLight),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -304,13 +324,19 @@ class _HistoryViewState extends State<HistoryView> {
                           fontWeight: FontWeight.w700,
                           color: item.isIzin
                               ? AppColors.warning
-                              : (item.isCheckedOut ? AppColors.success : AppColors.primary),
+                              : (item.isCheckedOut
+                                    ? AppColors.success
+                                    : AppColors.primary),
                         ),
                       ),
                     ),
                     const SizedBox(width: 4),
                     IconButton(
-                      icon: const Icon(Icons.delete_outline, size: 20, color: AppColors.danger),
+                      icon: const Icon(
+                        Icons.delete_outline,
+                        size: 20,
+                        color: AppColors.danger,
+                      ),
                       tooltip: 'Hapus',
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
@@ -328,7 +354,11 @@ class _HistoryViewState extends State<HistoryView> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.login, size: 16, color: AppColors.primary),
+                      const Icon(
+                        Icons.login,
+                        size: 16,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(width: 6),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,7 +369,10 @@ class _HistoryViewState extends State<HistoryView> {
                           ),
                           Text(
                             item.checkInTimeDisplay,
-                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -349,7 +382,11 @@ class _HistoryViewState extends State<HistoryView> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.logout, size: 16, color: AppColors.accent),
+                      const Icon(
+                        Icons.logout,
+                        size: 16,
+                        color: AppColors.accent,
+                      ),
                       const SizedBox(width: 6),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -360,7 +397,10 @@ class _HistoryViewState extends State<HistoryView> {
                           ),
                           Text(
                             item.checkOutTimeDisplay,
-                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -375,14 +415,20 @@ class _HistoryViewState extends State<HistoryView> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.location_on_outlined, size: 16, color: Colors.grey),
+                const Icon(
+                  Icons.location_on_outlined,
+                  size: 16,
+                  color: Colors.grey,
+                ),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
                     item.checkInAddress ?? 'Lokasi tidak tersedia',
                     style: TextStyle(
                       fontSize: 12,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -395,9 +441,14 @@ class _HistoryViewState extends State<HistoryView> {
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkBackground : const Color(0xFFFFFBEB),
+                  color: isDark
+                      ? AppColors.darkBackground
+                      : const Color(0xFFFFFBEB),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import 'core/constants/app_colors.dart';
 import 'core/constants/app_theme.dart';
 import 'providers/auth_provider.dart';
@@ -38,7 +39,7 @@ class AbsensiApp extends StatelessWidget {
     final themeProvider = context.watch<ThemeProvider>();
 
     return MaterialApp(
-      title: 'Absensi PPKD',
+      title: 'AbsensiKu',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -78,7 +79,7 @@ class AuthGate extends StatelessWidget {
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
               const Text(
-                'Memuat Aplikasi Presensi...',
+                'Memuat Aplikasi Absensi...',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

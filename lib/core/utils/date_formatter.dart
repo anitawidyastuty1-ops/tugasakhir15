@@ -37,7 +37,7 @@ class DateFormatter {
   }
 
   static String formatTime(DateTime dateTime) {
-    return DateFormat('HH:mm').format(dateTime) + ' WIB';
+    return '${DateFormat('HH:mm').format(dateTime)} WIB';
   }
 
   static String formatApiDate(DateTime dateTime) {

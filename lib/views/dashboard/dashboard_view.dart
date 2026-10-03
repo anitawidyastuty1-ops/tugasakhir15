@@ -67,9 +67,9 @@ class _DashboardViewState extends State<DashboardView> {
       ),
       builder: (ctx) {
         return StatefulBuilder(
-          builder: (context, setModalState) {
-            final isDark = Theme.of(context).brightness == Brightness.dark;
-            final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+          builder: (modalContext, setModalState) {
+            final isDark = Theme.of(modalContext).brightness == Brightness.dark;
+            final bottomInset = MediaQuery.of(modalContext).viewInsets.bottom;
 
             return Padding(
               padding: EdgeInsets.only(
@@ -200,7 +200,7 @@ class _DashboardViewState extends State<DashboardView> {
                   ElevatedButton(
                     onPressed: () async {
                       if (selectedStatus == 'izin' && alasanController.text.trim().isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        ScaffoldMessenger.of(modalContext).showSnackBar(
                           const SnackBar(
                             content: Text('Alasan izin wajib diisi'),
                             backgroundColor: AppColors.danger,
@@ -358,7 +358,7 @@ class _DashboardViewState extends State<DashboardView> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: const Icon(
@@ -402,7 +402,7 @@ class _DashboardViewState extends State<DashboardView> {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.35),
+                        color: AppColors.primary.withValues(alpha: 0.35),
                         blurRadius: 15,
                         offset: const Offset(0, 8),
                       ),
@@ -675,7 +675,7 @@ class _DashboardViewState extends State<DashboardView> {
         break;
       default:
         label = 'Belum Absen';
-        color = Colors.white.withOpacity(0.2);
+        color = Colors.white.withValues(alpha: 0.2);
         textColor = Colors.white;
         icon = Icons.access_time;
     }

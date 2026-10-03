@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/app_colors.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/absen_provider.dart';
@@ -85,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                             blurRadius: 15,
                             offset: const Offset(0, 6),
                           ),
@@ -100,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 24),
                   const Text(
-                    'ABSENSI PPKD',
+                    'ABSENSIKU',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 26,
@@ -111,11 +112,13 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Pusat Pelatihan Kerja Daerah',
+                    'Training Center',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
                     ),
                   ),
                   const SizedBox(height: 36),
@@ -127,11 +130,15 @@ class _LoginViewState extends State<LoginView> {
                       color: isDark ? AppColors.darkCard : Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                        color: isDark
+                            ? AppColors.darkBorder
+                            : AppColors.lightBorder,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
+                          color: Colors.black.withValues(
+                            alpha: isDark ? 0.2 : 0.04,
+                          ),
                           blurRadius: 15,
                           offset: const Offset(0, 5),
                         ),
@@ -152,7 +159,9 @@ class _LoginViewState extends State<LoginView> {
                           'Silakan masukkan email dan password untuk melanjutkan.',
                           style: TextStyle(
                             fontSize: 13,
-                            color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                            color: isDark
+                                ? AppColors.darkTextSecondary
+                                : AppColors.lightTextSecondary,
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -160,7 +169,10 @@ class _LoginViewState extends State<LoginView> {
                         // Email Field
                         const Text(
                           'Email',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         TextFormField(
@@ -185,7 +197,10 @@ class _LoginViewState extends State<LoginView> {
                         // Password Field
                         const Text(
                           'Password',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         TextFormField(
@@ -196,7 +211,9 @@ class _LoginViewState extends State<LoginView> {
                             prefixIcon: const Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                                _obscurePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -218,7 +235,9 @@ class _LoginViewState extends State<LoginView> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: authProvider.isLoading ? null : _handleLogin,
+                            onPressed: authProvider.isLoading
+                                ? null
+                                : _handleLogin,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               padding: const EdgeInsets.symmetric(vertical: 16),
@@ -256,14 +275,18 @@ class _LoginViewState extends State<LoginView> {
                       Text(
                         'Belum memiliki akun? ',
                         style: TextStyle(
-                          color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.lightTextSecondary,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const RegisterView()),
+                            MaterialPageRoute(
+                              builder: (_) => const RegisterView(),
+                            ),
                           );
                         },
                         child: const Text(

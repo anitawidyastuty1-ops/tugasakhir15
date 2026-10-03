@@ -26,10 +26,10 @@ class AppTheme {
           fontWeight: FontWeight.w700,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.lightSurface,
         elevation: 1,
-        shadowColor: Colors.black.withOpacity(0.05),
+        shadowColor: Colors.black.withValues(alpha: 0.05),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: const BorderSide(color: AppColors.lightBorder, width: 1),
@@ -97,10 +97,10 @@ class AppTheme {
           fontWeight: FontWeight.w700,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.darkCard,
         elevation: 1,
-        shadowColor: Colors.black.withOpacity(0.3),
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: const BorderSide(color: AppColors.darkBorder, width: 1),

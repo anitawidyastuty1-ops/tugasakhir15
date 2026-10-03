@@ -179,7 +179,7 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(isDark ? 0.2 : 0.04),
+                    color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -264,7 +264,7 @@ class _ProfileViewState extends State<ProfileView> {
                     secondary: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(

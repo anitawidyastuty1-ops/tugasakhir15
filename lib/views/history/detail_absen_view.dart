@@ -128,8 +128,8 @@ class DetailAbsenView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                           decoration: BoxDecoration(
                             color: absen.isIzin
-                                ? AppColors.warning.withOpacity(0.15)
-                                : AppColors.primary.withOpacity(0.15),
+                                ? AppColors.warning.withValues(alpha: 0.15)
+                                : AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
