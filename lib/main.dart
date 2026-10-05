@@ -70,7 +70,7 @@ class AuthGate extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: const Icon(
-                  Icons.fingerprint_rounded,
+                  Icons.home_max_outlined,
                   color: Colors.white,
                   size: 42,
                 ),

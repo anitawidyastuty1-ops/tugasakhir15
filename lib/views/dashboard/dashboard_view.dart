@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../core/constants/app_colors.dart';
 import '../../core/services/location_service.dart';
 import '../../core/utils/date_formatter.dart';
@@ -27,7 +29,10 @@ class _DashboardViewState extends State<DashboardView> {
   void initState() {
     super.initState();
     _updateClock();
-    _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) => _updateClock());
+    _clockTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (_) => _updateClock(),
+    );
     _loadLocation();
   }
 
@@ -105,33 +110,42 @@ class _DashboardViewState extends State<DashboardView> {
                     children: [
                       Expanded(
                         child: InkWell(
-                          onTap: () => setModalState(() => selectedStatus = 'masuk'),
+                          onTap: () =>
+                              setModalState(() => selectedStatus = 'masuk'),
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             decoration: BoxDecoration(
                               color: selectedStatus == 'masuk'
                                   ? AppColors.primary
-                                  : (isDark ? AppColors.darkBackground : const Color(0xFFF1F5F9)),
+                                  : (isDark
+                                        ? AppColors.darkBackground
+                                        : const Color(0xFFF1F5F9)),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: selectedStatus == 'masuk'
                                     ? AppColors.primary
-                                    : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                                    : (isDark
+                                          ? AppColors.darkBorder
+                                          : AppColors.lightBorder),
                               ),
                             ),
                             child: Column(
                               children: [
                                 Icon(
                                   Icons.login_rounded,
-                                  color: selectedStatus == 'masuk' ? Colors.white : AppColors.primary,
+                                  color: selectedStatus == 'masuk'
+                                      ? Colors.white
+                                      : AppColors.primary,
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
                                   'Hadir / Masuk',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    color: selectedStatus == 'masuk' ? Colors.white : null,
+                                    color: selectedStatus == 'masuk'
+                                        ? Colors.white
+                                        : null,
                                   ),
                                 ),
                               ],
@@ -142,33 +156,42 @@ class _DashboardViewState extends State<DashboardView> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: InkWell(
-                          onTap: () => setModalState(() => selectedStatus = 'izin'),
+                          onTap: () =>
+                              setModalState(() => selectedStatus = 'izin'),
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             decoration: BoxDecoration(
                               color: selectedStatus == 'izin'
                                   ? AppColors.warning
-                                  : (isDark ? AppColors.darkBackground : const Color(0xFFF1F5F9)),
+                                  : (isDark
+                                        ? AppColors.darkBackground
+                                        : const Color(0xFFF1F5F9)),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: selectedStatus == 'izin'
                                     ? AppColors.warning
-                                    : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                                    : (isDark
+                                          ? AppColors.darkBorder
+                                          : AppColors.lightBorder),
                               ),
                             ),
                             child: Column(
                               children: [
                                 Icon(
                                   Icons.assignment_late_outlined,
-                                  color: selectedStatus == 'izin' ? Colors.white : AppColors.warning,
+                                  color: selectedStatus == 'izin'
+                                      ? Colors.white
+                                      : AppColors.warning,
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
                                   'Permohonan Izin',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    color: selectedStatus == 'izin' ? Colors.white : null,
+                                    color: selectedStatus == 'izin'
+                                        ? Colors.white
+                                        : null,
                                   ),
                                 ),
                               ],
@@ -184,7 +207,10 @@ class _DashboardViewState extends State<DashboardView> {
                     const SizedBox(height: 16),
                     const Text(
                       'Alasan Izin',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     TextField(
@@ -199,7 +225,8 @@ class _DashboardViewState extends State<DashboardView> {
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () async {
-                      if (selectedStatus == 'izin' && alasanController.text.trim().isEmpty) {
+                      if (selectedStatus == 'izin' &&
+                          alasanController.text.trim().isEmpty) {
                         ScaffoldMessenger.of(modalContext).showSnackBar(
                           const SnackBar(
                             content: Text('Alasan izin wajib diisi'),
@@ -214,14 +241,19 @@ class _DashboardViewState extends State<DashboardView> {
 
                       final success = await absenProvider.checkIn(
                         status: selectedStatus,
-                        alasanIzin: selectedStatus == 'izin' ? alasanController.text.trim() : null,
+                        alasanIzin: selectedStatus == 'izin'
+                            ? alasanController.text.trim()
+                            : null,
                       );
 
                       if (mounted) {
                         if (success) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(absenProvider.successMessage ?? 'Absen berhasil dicatat'),
+                              content: Text(
+                                absenProvider.successMessage ??
+                                    'Absen berhasil dicatat',
+                              ),
                               backgroundColor: AppColors.success,
                               behavior: SnackBarBehavior.floating,
                             ),
@@ -229,7 +261,10 @@ class _DashboardViewState extends State<DashboardView> {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(absenProvider.errorMessage ?? 'Gagal absen masuk'),
+                              content: Text(
+                                absenProvider.errorMessage ??
+                                    'Gagal absen masuk',
+                              ),
                               backgroundColor: AppColors.danger,
                               behavior: SnackBarBehavior.floating,
                             ),
@@ -238,12 +273,19 @@ class _DashboardViewState extends State<DashboardView> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedStatus == 'masuk' ? AppColors.primary : AppColors.warning,
+                      backgroundColor: selectedStatus == 'masuk'
+                          ? AppColors.primary
+                          : AppColors.warning,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
                     child: Text(
-                      selectedStatus == 'masuk' ? 'Konfirmasi Absen Masuk' : 'Kirim Permohonan Izin',
-                      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                      selectedStatus == 'masuk'
+                          ? 'Konfirmasi Absen Masuk'
+                          : 'Kirim Permohonan Izin',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ],
@@ -262,7 +304,9 @@ class _DashboardViewState extends State<DashboardView> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Konfirmasi Absen Pulang'),
-        content: const Text('Apakah Anda yakin ingin melakukan absen pulang sekarang?'),
+        content: const Text(
+          'Apakah Anda yakin ingin melakukan absen pulang sekarang?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -285,7 +329,9 @@ class _DashboardViewState extends State<DashboardView> {
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(absenProvider.successMessage ?? 'Absen pulang berhasil dicatat'),
+            content: Text(
+              absenProvider.successMessage ?? 'Absen pulang berhasil dicatat',
+            ),
             backgroundColor: AppColors.success,
             behavior: SnackBarBehavior.floating,
           ),
@@ -338,12 +384,16 @@ class _DashboardViewState extends State<DashboardView> {
                             '${DateFormatter.getGreeting()},',
                             style: TextStyle(
                               fontSize: 14,
-                              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            user?.name.isNotEmpty == true ? user!.name : 'Peserta PPKD',
+                            user?.name.isNotEmpty == true
+                                ? user!.name
+                                : 'Peserta PPKD',
                             style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
@@ -375,7 +425,9 @@ class _DashboardViewState extends State<DashboardView> {
                     Icon(
                       Icons.calendar_today_outlined,
                       size: 14,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -383,7 +435,9 @@ class _DashboardViewState extends State<DashboardView> {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                        color: isDark
+                            ? AppColors.darkTextSecondary
+                            : AppColors.lightTextSecondary,
                       ),
                     ),
                   ],
@@ -451,11 +505,18 @@ class _DashboardViewState extends State<DashboardView> {
                               children: [
                                 const Row(
                                   children: [
-                                    Icon(Icons.login, color: Colors.white70, size: 14),
+                                    Icon(
+                                      Icons.login,
+                                      color: Colors.white70,
+                                      size: 14,
+                                    ),
                                     SizedBox(width: 4),
                                     Text(
                                       'Masuk',
-                                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -477,11 +538,18 @@ class _DashboardViewState extends State<DashboardView> {
                               children: [
                                 const Row(
                                   children: [
-                                    Icon(Icons.logout, color: Colors.white70, size: 14),
+                                    Icon(
+                                      Icons.logout,
+                                      color: Colors.white70,
+                                      size: 14,
+                                    ),
                                     SizedBox(width: 4),
                                     Text(
                                       'Keluar',
-                                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -515,17 +583,20 @@ class _DashboardViewState extends State<DashboardView> {
                     // Button Absen Masuk
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: (absenProvider.isSubmitting ||
+                        onPressed:
+                            (absenProvider.isSubmitting ||
                                 absenProvider.todayStatus == 'masuk' ||
                                 absenProvider.todayStatus == 'selesai' ||
                                 absenProvider.todayStatus == 'izin')
                             ? null
                             : _showCheckInDialog,
-                        icon: const Icon(Icons.fingerprint, size: 22),
+                        icon: const Icon(Icons.home_max_outlined, size: 22),
                         label: const Text('Absen Masuk'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          disabledBackgroundColor: isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
+                          disabledBackgroundColor: isDark
+                              ? AppColors.darkBorder
+                              : const Color(0xFFE2E8F0),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -537,7 +608,8 @@ class _DashboardViewState extends State<DashboardView> {
                     // Button Absen Pulang
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: (absenProvider.isSubmitting ||
+                        onPressed:
+                            (absenProvider.isSubmitting ||
                                 absenProvider.todayStatus != 'masuk')
                             ? null
                             : _handleCheckOut,
@@ -545,7 +617,9 @@ class _DashboardViewState extends State<DashboardView> {
                         label: const Text('Absen Pulang'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.accent,
-                          disabledBackgroundColor: isDark ? AppColors.darkBorder : const Color(0xFFE2E8F0),
+                          disabledBackgroundColor: isDark
+                              ? AppColors.darkBorder
+                              : const Color(0xFFE2E8F0),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -569,7 +643,10 @@ class _DashboardViewState extends State<DashboardView> {
                         SizedBox(width: 10),
                         Text(
                           'Sedang memproses absensi...',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
@@ -593,7 +670,10 @@ class _DashboardViewState extends State<DashboardView> {
                   children: [
                     const Text(
                       'Lokasi Anda Saat Ini',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                     IconButton(
                       icon: _isLoadingLocation
@@ -615,12 +695,18 @@ class _DashboardViewState extends State<DashboardView> {
                     color: isDark ? AppColors.darkCard : Colors.white,
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
-                      color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                      color: isDark
+                          ? AppColors.darkBorder
+                          : AppColors.lightBorder,
                     ),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.location_pin, color: AppColors.danger, size: 22),
+                      const Icon(
+                        Icons.location_pin,
+                        color: AppColors.danger,
+                        size: 22,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
