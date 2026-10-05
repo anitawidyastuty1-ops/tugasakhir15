@@ -18,7 +18,7 @@ class AppColors {
   static const Color infoLight = Color(0xFFDBEAFE);
 
   // Light Mode Grayscale
-  static const Color lightBackground = Color(0xFFF8FAFC);
+  static const Color lightBackground = Color.fromARGB(255, 248, 252, 251);
   static const Color lightSurface = Colors.white;
   static const Color lightTextPrimary = Color(0xFF0F172A);
   static const Color lightTextSecondary = Color(0xFF64748B);

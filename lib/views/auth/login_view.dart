@@ -93,7 +93,7 @@ class _LoginViewState extends State<LoginView> {
                         ],
                       ),
                       child: const Icon(
-                        Icons.fingerprint_rounded,
+                        Icons.home_max_outlined,
                         color: Colors.white,
                         size: 48,
                       ),
@@ -150,15 +150,16 @@ class _LoginViewState extends State<LoginView> {
                         const Text(
                           'Masuk Akun',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 28,
                             fontWeight: FontWeight.w700,
+                            color: Colors.pink,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           'Silakan masukkan email dan password untuk melanjutkan.',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 20,
                             color: isDark
                                 ? AppColors.darkTextSecondary
                                 : AppColors.lightTextSecondary,
