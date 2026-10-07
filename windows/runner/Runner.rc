@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "tugasakhir15" "\0"
+            VALUE "FileDescription", "Absensiku" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tugasakhir15" "\0"
+            VALUE "InternalName", "Absensiku" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tugasakhir15.exe" "\0"
-            VALUE "ProductName", "tugasakhir15" "\0"
+            VALUE "OriginalFilename", "Absensiku.exe" "\0"
+            VALUE "ProductName", "Absensiku" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
